@@ -1,7 +1,9 @@
-AutoScroll
+AutoScroll (Forked to work with Manifest V3)
 ==========
 
 For users on Linux or Mac, the lack of autoscroll can be a big pain. This extension can help!
+
+Based on the following project: https://github.com/Pauan/AutoScroll
 
 Intentional differences with Firefox
 ====================================
