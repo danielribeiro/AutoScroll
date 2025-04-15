@@ -1,12 +1,14 @@
 "use strict";
 
-if ("Options.config.user" in localStorage) {
-  var o = JSON.parse(localStorage["Options.config.user"])
-  chrome.storage.local.set(o, function () {
-    delete localStorage["Options.config.user"]
-  })
-}
+// Migrate old user configuration if it exists
+chrome.storage.local.get("Options.config.user", function (data) {
+  if (data && data["Options.config.user"]) {
+    const userConfig = JSON.parse(data["Options.config.user"]);
+    chrome.storage.local.set(userConfig, function () {
+      chrome.storage.local.remove("Options.config.user");
+    });
+  }
+});
 
-if ("Options.config.base" in localStorage) {
-  delete localStorage["Options.config.base"]
-}
+// Remove old base configuration if it exists
+chrome.storage.local.remove("Options.config.base");
